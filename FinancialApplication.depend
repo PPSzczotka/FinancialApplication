@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1789495425 source:c:\projekty\financialapplication\file.cpp
+	"File.h"
+
+1789495493 c:\projekty\financialapplication\file.h
+	"Markup.h"
+
+1303067212 c:\projekty\financialapplication\markup.h
+	<stdlib.h>
+	<string.h>
+	<string>
+	<afx.h>
+
+1789404475 source:c:\projekty\financialapplication\financialoperation.cpp
+
+1790102936 source:c:\projekty\financialapplication\main.cpp
+	<iostream>
+	"UserFile.h"
+
+1790012385 c:\projekty\financialapplication\userfile.h
+	<vector>
+	"File.h"
+	"User.h"
+
+1789489736 c:\projekty\financialapplication\user.h
+	<iostream>
+
+1303067212 source:c:\projekty\financialapplication\markup.cpp
+	<stdio.h>
+	"Markup.h"
+	<errno.h>
+	<iconv.h>
+	<windows.h>
+	<mbstring.h>
+
+1789404475 source:c:\projekty\financialapplication\type.cpp
+
+1789404475 source:c:\projekty\financialapplication\user.cpp
+
+1790100618 source:c:\projekty\financialapplication\userfile.cpp
+	"UserFile.h"
+	<string>
+
+1789404475 source:c:\projekty\financialapplication\usermanager.cpp
+
