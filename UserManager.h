@@ -17,6 +17,11 @@ private:
 public:
     UserManager (string userFileName);
     void registerUser();
+    bool loginUser();
+    bool isUserLoggedIn();
+    void logoutUser();
+    int getLoggedUserId();
+    void changeUserPassword();
 };
 
 #endif

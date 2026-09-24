@@ -1,6 +1,7 @@
 #include <sstream>
 #include "HelperMethods.h"
 
+
 string HelperMethods:: konwerjsaIntNaString(int liczba)
 {
     ostringstream ss;
