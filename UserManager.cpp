@@ -3,7 +3,7 @@
 #include  "File.h"
 
 UserManager::UserManager(string userFileName)
-:userFile(userFileName)
+    :userFile(userFileName)
 {
     loggedUserId = 0;
     users = userFile.loadUsersFromFile();
@@ -71,6 +71,10 @@ bool UserManager::loginUser()
                 loggedUserId= itr-> id;
                 return true;
             }
+            else
+            {
+                cout<<"Haslo jest nieprawidlowe"<<endl;
+            }
         }
         itr++;
     }
@@ -96,18 +100,27 @@ int UserManager:: getLoggedUserId()
     return loggedUserId;
 }
 
- void UserManager:: changeUserPassword()
- {
+void UserManager:: changeUserPassword()
+{
     string noweHaslo = "";
     cout << "Podaj nowe haslo:"<< endl;
     noweHaslo = HelperMethods::wczytajLinie();
 
-   if(userFile.changePasswordInFile(loggedUserId,noweHaslo))
-      {
-          cout<< "Haslo zostalo zmienione!"<< endl;
-      }
+    if(userFile.changePasswordInFile(loggedUserId,noweHaslo))
+    {
+        cout<< "Haslo zostalo zmienione!"<< endl;
+        vector<User>::iterator itr = users.begin();
+        while (itr != users.end())
+        {
+            if(itr ->id == loggedUserId)
+            {
+                itr-> password = noweHaslo;
+            }
+            itr++;
+        }
+    }
     else
     {
         cout<<"Zmiana hasla nie powiodla sie" << endl;
     }
- }
+}
