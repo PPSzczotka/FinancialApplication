@@ -1,12 +1,14 @@
 #include <iostream>
 #include "UserManager.h"
 #include "HelperMethods.h"
+#include "FinancialOperationManager.h"
 
 using namespace std;
 
 int main()
 {
     UserManager userManager("Users.xml");
+    FinancialOperationManager *financialOperationManager;
     char wybor;
     while (true)
     {
@@ -27,7 +29,15 @@ int main()
                 break;
 
             case'2':
-                    userManager.loginUser();
+                    if(userManager.loginUser())
+                    {
+                      financialOperationManager= new  FinancialOperationManager (
+                        "Income.xml",
+                        "Expense.xml",
+                        userManager.getLoggedUserId()
+                        );
+                    }
+
                 break;
 
             case '9':
@@ -57,15 +67,15 @@ int main()
             switch (wybor)
             {
             case '1':
-                //tutaj metoda
+                financialOperationManager->addIncome();
                 break;
 
             case '2':
-                //tutaj metoda
+                financialOperationManager->addExpense();
                 break;
 
             case '3':
-                //tutaj metoda
+                financialOperationManager->displayCurrentBalance();
                 break;
 
             case '4':
