@@ -83,4 +83,11 @@
 <login>kicia123</login>
 <password>kit123</password>
 </User>
+<User>
+<id>12</id>
+<firstName>Krysia</firstName>
+<lastName>Mysia</lastName>
+<login>mysia12</login>
+<password>mysia123</password>
+</User>
 </Users>

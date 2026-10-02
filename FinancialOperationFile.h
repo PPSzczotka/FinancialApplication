@@ -12,7 +12,10 @@ class FinancialOperationFile : public File
 {
     public:
     FinancialOperationFile (string fileName);
+
     vector <FinancialOperation> loadOperationsFromFile (const int loggedUserId);
     bool addOperationToFile (const FinancialOperation &financialOperation);
+
+
 };
 #endif

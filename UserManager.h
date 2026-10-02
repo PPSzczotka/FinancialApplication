@@ -11,6 +11,7 @@ class UserManager
 private:
     int loggedUserId;
     vector<User>users;
+
     UserFile userFile;
     bool checkIfLoginExist(const string &login);
 

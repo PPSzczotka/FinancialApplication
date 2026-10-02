@@ -1,4 +1,6 @@
 #include "FinancialOperationFile.h"
+#include <sstream>
+#include <iomanip>
 
 FinancialOperationFile::FinancialOperationFile(string fileName) : File(fileName)
 {
@@ -23,6 +25,10 @@ vector<FinancialOperation> FinancialOperationFile:: loadOperationsFromFile(const
         xml.IntoElem();
         xml.FindElem("id");
         financialOperation.id = stoi(xml.GetData());
+        if (financialOperation.id>lastId)
+        {
+            lastId= financialOperation.id;
+        }
 
         xml.FindElem("userId");
         financialOperation.userId = stoi(xml.GetData());
@@ -72,7 +78,9 @@ bool FinancialOperationFile::addOperationToFile (const FinancialOperation &finan
     xml.AddElem("id",financialOperation.id);
     xml.AddElem("userId",financialOperation.userId);
     xml.AddElem("date",financialOperation.date);
-    xml.AddElem("amount",financialOperation.amount);
+    ostringstream stream;
+    stream << fixed << setprecision(2) << financialOperation.amount;
+    xml.AddElem("amount",stream.str());
 
     if (financialOperation.type == Type::INCOME)
     {

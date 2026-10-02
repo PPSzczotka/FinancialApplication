@@ -5,8 +5,8 @@
 #include <string>
 
 #include "FinancialOperation.h"
+#include "FinancialOperationFile.h"
 #include "Type.h"
-
 
 using namespace std;
 
@@ -14,8 +14,12 @@ class FinancialOperationManager
 {
 private:
     const int LOGGED_USER_ID;
+
+    FinancialOperationFile incomesFile;
+    FinancialOperationFile expensesFile;
+
     vector<FinancialOperation> incomes;
-    vector<FinancialOperation> expense;
+    vector<FinancialOperation> expenses;
 
     FinancialOperation addOperationDetails(const Type &type);
     void showBalance(int startDate, int endDate);
