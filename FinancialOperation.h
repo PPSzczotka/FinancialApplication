@@ -10,6 +10,7 @@ struct FinancialOperation
     int id;
     int userId;
     string date;
+    string item;
     double amount;
     Type type;
 };

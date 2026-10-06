@@ -13,11 +13,12 @@
 
 1789404475 source:c:\projekty\financialapplication\financialoperation.cpp
 
-1790951796 source:c:\projekty\financialapplication\main.cpp
+1791306900 source:c:\projekty\financialapplication\main.cpp
 	<iostream>
 	"UserManager.h"
 	"HelperMethods.h"
 	"FinancialOperationManager.h"
+	"AmountMethods.h"
 
 1790012385 c:\projekty\financialapplication\userfile.h
 	<vector>
@@ -60,11 +61,13 @@
 	"User.h"
 	"UserFile.h"
 
-1790962749 source:c:\projekty\financialapplication\financialoperationmanager.cpp
+1791306798 source:c:\projekty\financialapplication\financialoperationmanager.cpp
 	"FinancialOperationManager.h"
 	"FinancialOperation.h"
 	"HelperMethods.h"
 	"File.h"
+	"DateMethods.h"
+	"AmountMethods.h"
 
 1790952980 c:\projekty\financialapplication\financialoperationmanager.h
 	<vector>
@@ -73,20 +76,34 @@
 	"FinancialOperationFile.h"
 	"Type.h"
 
-1789489799 c:\projekty\financialapplication\financialoperation.h
+1791216696 c:\projekty\financialapplication\financialoperation.h
 	<iostream>
 	"Type.h"
 
 1789489736 c:\projekty\financialapplication\type.h
 	<iostream>
 
-1790963422 source:c:\projekty\financialapplication\financialoperationfile.cpp
+1791218165 source:c:\projekty\financialapplication\financialoperationfile.cpp
 	"FinancialOperationFile.h"
 	<sstream>
 	<iomanip>
 
-1790789739 c:\projekty\financialapplication\financialoperationfile.h
+1791218002 c:\projekty\financialapplication\financialoperationfile.h
 	<vector>
 	"File.h"
 	"FinancialOperation.h"
+
+1791223637 source:c:\projekty\financialapplication\datemethods.cpp
+	"DateMethods.h"
+
+1791222073 c:\projekty\financialapplication\datemethods.h
+	<iostream>
+	<ctime>
+	<map>
+
+1791305983 source:c:\projekty\financialapplication\amountmethods.cpp
+	"AmountMethods.h"
+
+1791305042 c:\projekty\financialapplication\amountmethods.h
+	<iostream>
 

@@ -2,6 +2,8 @@
 #include "UserManager.h"
 #include "HelperMethods.h"
 #include "FinancialOperationManager.h"
+#include "AmountMethods.h"
+
 
 using namespace std;
 

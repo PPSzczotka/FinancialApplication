@@ -13,7 +13,7 @@ class FinancialOperationFile : public File
     public:
     FinancialOperationFile (string fileName);
 
-    vector <FinancialOperation> loadOperationsFromFile (const int loggedUserId);
+    vector <FinancialOperation> loadOperationsFromFile (const int loggedUserId,const Type &type);
     bool addOperationToFile (const FinancialOperation &financialOperation);
 
 

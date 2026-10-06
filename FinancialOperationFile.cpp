@@ -7,7 +7,7 @@ FinancialOperationFile::FinancialOperationFile(string fileName) : File(fileName)
 
 }
 
-vector<FinancialOperation> FinancialOperationFile:: loadOperationsFromFile(const int loggedUserId)
+vector<FinancialOperation> FinancialOperationFile:: loadOperationsFromFile(const int loggedUserId, const Type &type)
 {
     vector<FinancialOperation> financialOperations;
     if(!xml.Load(getFileName()))
@@ -36,19 +36,11 @@ vector<FinancialOperation> FinancialOperationFile:: loadOperationsFromFile(const
         xml.FindElem("date");
         financialOperation.date = xml.GetData();
 
+        xml.FindElem("item");
+        financialOperation.item = xml.GetData();
+
         xml.FindElem("amount");
         financialOperation.amount = stod(xml.GetData());
-
-        xml.FindElem("type");
-        string type = xml.GetData();
-        if (type == "INCOME")
-        {
-            financialOperation.type = Type::INCOME;
-        }
-        else
-        {
-            financialOperation.type = Type::EXPENSE;
-        }
 
         if (financialOperation.userId==loggedUserId)
         {
@@ -78,18 +70,10 @@ bool FinancialOperationFile::addOperationToFile (const FinancialOperation &finan
     xml.AddElem("id",financialOperation.id);
     xml.AddElem("userId",financialOperation.userId);
     xml.AddElem("date",financialOperation.date);
+    xml.AddElem("item", financialOperation.item);
     ostringstream stream;
     stream << fixed << setprecision(2) << financialOperation.amount;
     xml.AddElem("amount",stream.str());
-
-    if (financialOperation.type == Type::INCOME)
-    {
-        xml.AddElem("type","INCOME");
-    }
-    else
-    {
-        xml.AddElem("type","EXPENSE");
-    }
 
     if (!xml.Save(getFileName()))
     {

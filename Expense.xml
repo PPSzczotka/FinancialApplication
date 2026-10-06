@@ -6,4 +6,11 @@
 <amount>152</amount>
 <type>EXPENSE</type>
 </Operation>
+<Operation>
+<id>2</id>
+<userId>8</userId>
+<date>13102026</date>
+<item>wczasy</item>
+<amount>1255.00</amount>
+</Operation>
 </Operations>
