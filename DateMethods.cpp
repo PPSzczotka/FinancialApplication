@@ -1,5 +1,5 @@
 #include "DateMethods.h"
-
+#include <ctime>
 
 int DateMethods::convertStringDateToInt(const string &dateAsString)
 {
@@ -64,4 +64,95 @@ bool DateMethods:: validateDate(string &date)
     }
 
     return true;
+}
+
+int DateMethods::getCurrentDate()
+{
+    time_t today= time(0);
+    tm *date= localtime(&today);
+
+
+    int year= date->tm_year + 1900;
+    int month = date->tm_mon + 1;
+    int day = date->tm_mday;
+
+    int currentDate = year*10000 + month*100 + day;
+    return currentDate;
+}
+
+int DateMethods:: getCurrentMonthFirstDayDate()
+{
+    time_t today= time(0);
+    tm *date= localtime(&today);
+
+
+    int year= date->tm_year + 1900;
+    int month = date->tm_mon + 1;
+    int day = 1;
+
+    int firstDayOfMonth= year*10000 + month*100 + day;
+    return firstDayOfMonth;
+}
+
+int DateMethods::getPreviousMonthLastDayDate()
+{
+    time_t today= time(0);
+    tm *date= localtime(&today);
+
+
+    int year= date->tm_year + 1900;
+    int month = date->tm_mon + 1;
+    if(month==1)
+    {
+        month =12;
+        year = year-1;
+    }
+    else
+    {
+        month =month-1;
+    }
+
+    int day=0;
+    if(month==2)
+    {
+        if (isYearLeap(year))
+            day = 29;
+        else
+            day = 28;
+    }
+    else if(month== 4 || month==6 || month==9 ||month==11)
+    {
+        day =30;
+    }
+    else
+    {
+        day=31;
+    }
+
+    int previousMonthLastDay= year*10000 + month*100 + day;
+    return previousMonthLastDay;
+}
+
+int DateMethods::getPreviousMonthFirstDayDate()
+{
+    time_t today= time(0);
+    tm *date= localtime(&today);
+
+
+    int year= date->tm_year + 1900;
+    int month = date->tm_mon + 1;
+
+    if(month==1)
+    {
+        year= year -1;
+        month = 12;
+    }
+    else
+    {
+        month = month -1;
+    }
+
+    int day = 1;
+    int previousMonthFirstDay= year*10000 + month*100 + day;
+    return previousMonthFirstDay;
 }

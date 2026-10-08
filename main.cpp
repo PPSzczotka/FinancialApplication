@@ -3,12 +3,29 @@
 #include "HelperMethods.h"
 #include "FinancialOperationManager.h"
 #include "AmountMethods.h"
+#include "DateMethods.h"
 
 
 using namespace std;
 
 int main()
 {
+    DateMethods dateMethods;
+
+cout << "Dzisiejsza data: "
+     << dateMethods.getCurrentDate() << endl;
+
+cout << "Pierwszy dzien obecnego miesiaca: "
+     << dateMethods.getCurrentMonthFirstDayDate() << endl;
+
+cout << "Pierwszy dzien poprzedniego miesiaca: "
+     << dateMethods.getPreviousMonthFirstDayDate() << endl;
+
+cout << "Ostatni dzien poprzedniego miesiaca: "
+     << dateMethods.getPreviousMonthLastDayDate() << endl;
+
+system("pause");
+
     UserManager userManager("Users.xml");
     FinancialOperationManager *financialOperationManager;
     char wybor;
