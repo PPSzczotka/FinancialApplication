@@ -21,17 +21,17 @@ private:
     vector<FinancialOperation> incomes;
     vector<FinancialOperation> expenses;
 
-    FinancialOperation addOperationDetails(const Type &type);
+    FinancialOperation addOperationDetails(Type type);
     void showBalance(int startDate, int endDate);
-    double calculateBalance(int startDate, int endDate, const Type &type);
+    double calculateBalance(int startDate, int endDate, Type type);
 
 public:
     FinancialOperationManager (string incomeFileName, string expenseFileName, int loggedUserId);
     void addIncome();
     void addExpense();
-    void  displayCurrentBalance();
+    void displayCurrentBalance();
     void displayPreviousBalance();
-    void  displayBalanceForPeriod();
+    void displayBalanceForPeriod();
 
 };
 #endif

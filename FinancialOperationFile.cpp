@@ -61,7 +61,10 @@ bool FinancialOperationFile::addOperationToFile (const FinancialOperation &finan
     }
 
     xml.ResetPos();
-    xml.FindElem("Operations");
+    if(!xml.FindElem("Operations"))
+    {
+        return false;
+    }
     xml.IntoElem();
 
     xml.AddElem("Operation");

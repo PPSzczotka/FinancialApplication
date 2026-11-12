@@ -14,7 +14,7 @@ int loggedUserId): incomesFile(incomeFileName), expensesFile(expenseFileName),LO
     expenses = expensesFile.loadOperationsFromFile(LOGGED_USER_ID, Type::EXPENSE);
 }
 
-FinancialOperation FinancialOperationManager::addOperationDetails(const Type &type)
+FinancialOperation FinancialOperationManager::addOperationDetails(Type type)
 {
     AmountMethods amountMethods;
 
@@ -31,17 +31,44 @@ FinancialOperation FinancialOperationManager::addOperationDetails(const Type &ty
     financialOperation.userId=LOGGED_USER_ID;
 
     DateMethods dateMethods;
-
+    char wybor;
     do
     {
-        cout<< "Podaj date operacji: ";
-        financialOperation.date=HelperMethods::wczytajLinie();
-        if(!dateMethods.validateDate(financialOperation.date))
+        cout<< "WYBIERZ DATE"<< endl;
+        cout <<"1.Dzisiejsz data"<< endl;
+        cout<< "2.Podaj date"<< endl;
+        wybor = HelperMethods::wczytajZnak();
+        if( wybor == '1')
         {
-            cout <<"Podana data jest nieprawidlowa. Wprowadz ponownie date"<< endl;
+            financialOperation.date = to_string(dateMethods.getCurrentDate());
+        }
+        else if (wybor == '2')
+        {
+            bool poprawnaData = false;
+            do
+            {
+                cout<< "Podaj date operacji: ";
+                financialOperation.date=HelperMethods::wczytajLinie();
+                if(!dateMethods.validateDate(financialOperation.date))
+                {
+                    cout <<"Podana data jest nieprawidlowa. Wprowadz ponownie date"<< endl;
+                }
+                else
+                {
+                    int data = dateMethods.convertStringDateToInt(financialOperation.date);
+                    if(data < 20000101 || data > dateMethods.getCurrentMonthLastDayDate())
+                    {
+                        cout << "Podana data jest poza dozwolonym zakresem. Wprowadz ponownie date"<< endl;
+                    }
+                    else
+                        poprawnaData = true;
+                }
+            }
+
+            while(!poprawnaData);
         }
     }
-    while(!dateMethods.validateDate(financialOperation.date));
+    while (wybor!='1' && wybor!='2');
 
     cout<< "Podaj opis operacji: ";
     financialOperation.item=HelperMethods::wczytajLinie();
@@ -53,9 +80,9 @@ FinancialOperation FinancialOperationManager::addOperationDetails(const Type &ty
         cout<< "Podaj kwote operacji: ";
         kwota= HelperMethods::wczytajLinie();
         if (!amountMethods.validateAmount(kwota))
-            {
-                cout<<"Podana kwota nie jest prawidlowa. Wprowadz ponownie" << endl;
-            }
+        {
+            cout<<"Podana kwota nie jest prawidlowa. Wprowadz ponownie" << endl;
+        }
     }
     while (!amountMethods.validateAmount(kwota));
     financialOperation.amount= stod(kwota);
@@ -68,8 +95,7 @@ FinancialOperation FinancialOperationManager::addOperationDetails(const Type &ty
 
 void FinancialOperationManager::addIncome()
 {
-    FinancialOperation financialOperation;
-    financialOperation = addOperationDetails(Type::INCOME);
+   FinancialOperation financialOperation = addOperationDetails(Type::INCOME);
 
     if(incomesFile.addOperationToFile(financialOperation))
     {
@@ -87,21 +113,22 @@ void FinancialOperationManager::addIncome()
 
 void FinancialOperationManager::addExpense()
 {
-    FinancialOperation financialOperation;
-    financialOperation = addOperationDetails(Type::EXPENSE);
+   FinancialOperation financialOperation = addOperationDetails(Type::EXPENSE);
 
     if(expensesFile.addOperationToFile(financialOperation))
     {
         cout<< "Twoje dane zostaly zapisane poprawnie"<< endl;
         expenses.push_back(financialOperation);
+        system("pause");
     }
     else
     {
         cout<< "Blad zapisu danych. Wprowadz ponownie"<< endl;
+        system("pause");
     }
 }
 
-double FinancialOperationManager:: calculateBalance(int startDate, int endDate, const Type &type)
+double FinancialOperationManager:: calculateBalance(int startDate, int endDate,Type type)
 {
     double suma = 0;
 
@@ -109,7 +136,7 @@ double FinancialOperationManager:: calculateBalance(int startDate, int endDate, 
 
     if (type == Type::INCOME)
     {
-        for (FinancialOperation financialOperation : incomes )
+        for (const FinancialOperation &financialOperation : incomes )
         {
             int dataOperacji = dateMethods.convertStringDateToInt(financialOperation.date);
             if (dataOperacji>= startDate && dataOperacji<=endDate)
@@ -120,7 +147,7 @@ double FinancialOperationManager:: calculateBalance(int startDate, int endDate, 
     }
     else
     {
-        for (FinancialOperation financialOperation : expenses )
+        for ( const FinancialOperation &financialOperation : expenses )
         {
             int dataOperacji = dateMethods.convertStringDateToInt(financialOperation.date);
             if (dataOperacji>= startDate && dataOperacji<=endDate)
@@ -145,5 +172,68 @@ void FinancialOperationManager::showBalance(int startDate, int endDate)
 
 void FinancialOperationManager::displayCurrentBalance()
 {
+    DateMethods dateMethods;
+
+    int startDate = dateMethods.getCurrentMonthFirstDayDate();
+    int endDate = dateMethods.getCurrentDate();
+
+    showBalance(startDate,endDate);
+}
+
+
+void FinancialOperationManager::displayPreviousBalance()
+{
+    DateMethods dateMethods;
+
+    int startDate = dateMethods.getPreviousMonthFirstDayDate();
+    int endDate = dateMethods.getPreviousMonthLastDayDate();
+
+    showBalance(startDate,endDate);
+}
+
+void FinancialOperationManager::displayBalanceForPeriod()
+{
+    DateMethods dateMethods;
+
+    string startDate;
+    string endDate;
+
+    int startDateInt;
+    int endDateInt;
+
+    do
+    {
+            do
+            {
+                cout << "Podaj date poczatkowa:"<< endl;
+                startDate = HelperMethods::wczytajLinie();
+                if(!dateMethods.validateDate(startDate))
+                {
+                    cout<< "Poczatkowa data jest nieprawidlowa. Wprowadz ponownie" << endl;
+                }
+            }
+            while(!dateMethods.validateDate(startDate));
+
+
+            do
+            {
+                cout << "Podaj date koncowa:"<< endl;
+                endDate = HelperMethods::wczytajLinie();
+                if(!dateMethods.validateDate(endDate))
+                {
+                    cout<< "Koncowa data jest nieprawidlowa. Wprowadz ponownie" << endl;
+                }
+            }
+            while(!dateMethods.validateDate(endDate));
+        startDateInt = dateMethods.convertStringDateToInt(startDate);
+        endDateInt = dateMethods.convertStringDateToInt(endDate);
+        if (startDateInt > endDateInt)
+        {
+            cout << "Zakres dat jest nieprawidlowy" << endl;
+        }
+    }
+    while (startDateInt > endDateInt);
+
+    showBalance(startDateInt,endDateInt);
 
 }

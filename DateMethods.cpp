@@ -1,5 +1,6 @@
 #include "DateMethods.h"
 #include <ctime>
+#include <cctype>
 
 int DateMethods::convertStringDateToInt(const string &dateAsString)
 {
@@ -20,11 +21,25 @@ bool DateMethods::isYearLeap(int year)
     return false;
 }
 
-bool DateMethods:: validateDate(string &date)
+bool DateMethods:: validateDate(const string &date)
 {
     int year;
     int month;
     int day;
+
+    if(date.length() !=8)
+    {
+        return false;
+    }
+
+    for (char znak : date)
+    {
+        if (!isdigit(znak))
+            {
+                return false;
+            }
+    }
+    system("pause");
 
     year = stoi(date.substr(0,4));
     month = stoi(date.substr(4,2));
@@ -155,4 +170,33 @@ int DateMethods::getPreviousMonthFirstDayDate()
     int day = 1;
     int previousMonthFirstDay= year*10000 + month*100 + day;
     return previousMonthFirstDay;
+}
+
+int DateMethods::getCurrentMonthLastDayDate()
+{
+    time_t today= time(0);
+    tm *date= localtime(&today);
+
+    int year= date->tm_year + 1900;
+    int month = date->tm_mon + 1;
+    int day;
+
+    if(month==2)
+    {
+        if (isYearLeap(year))
+            day = 29;
+        else
+            day = 28;
+    }
+    else if(month== 4 || month==6 || month==9 ||month==11)
+    {
+        day =30;
+    }
+    else
+    {
+        day=31;
+    }
+
+    int currentMonthLastDayDate= year*10000 + month*100 + day;
+    return currentMonthLastDayDate;
 }
