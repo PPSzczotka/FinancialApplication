@@ -5,6 +5,8 @@
 #include "DateMethods.h"
 #include "AmountMethods.h"
 
+#include <algorithm>
+
 FinancialOperationManager:: FinancialOperationManager (
 string incomeFileName,
 string expenseFileName,
@@ -92,6 +94,16 @@ FinancialOperation FinancialOperationManager::addOperationDetails(Type type)
     return financialOperation;
 }
 
+bool compareOperations( const FinancialOperation &first, const FinancialOperation &second)
+{
+    if(first.date != second.date)
+    {
+        return first.date< second.date;
+    }
+
+    return first.type == Type::INCOME && second.type == Type::EXPENSE;
+}
+
 
 void FinancialOperationManager::addIncome()
 {
@@ -161,9 +173,28 @@ double FinancialOperationManager:: calculateBalance(int startDate, int endDate,T
 
 void FinancialOperationManager::showBalance(int startDate, int endDate)
 {
+    vector<FinancialOperation> operations;
+
+    operations.insert(operations.end(), incomes.begin(), incomes.end());
+    operations.insert(operations.end(), expenses.begin(), expenses.end());
+
+    sort(operations.begin(), operations.end(), compareOperations);
+
     double przychod = calculateBalance(startDate,endDate,Type::INCOME);
     double wydatki = calculateBalance(startDate,endDate,Type::EXPENSE);
     double bilans = przychod-wydatki;
+
+    DateMethods dateMethods;
+    for (vector<FinancialOperation>::iterator itr = operations.begin(); itr !=operations.end(); itr++)
+    {
+        int dataOperacji = dateMethods.convertStringDateToInt(itr->date);
+        if(dataOperacji >= startDate && dataOperacji<= endDate)
+        {
+            cout << "Data operacji: "<< itr->date
+                 << " | Opis operacji: "<< itr->item
+                 << " | Kwota: "<< itr->amount << endl;
+        }
+    }
 
     cout<< "Przychody :"<< przychod << endl;
     cout<< "Wydatki :"<< wydatki << endl;
@@ -235,5 +266,4 @@ void FinancialOperationManager::displayBalanceForPeriod()
     while (startDateInt > endDateInt);
 
     showBalance(startDateInt,endDateInt);
-
 }

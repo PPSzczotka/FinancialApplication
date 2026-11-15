@@ -3,6 +3,13 @@
 
 bool AmountMethods::validateAmount(string amount)
 {
+  size_t pozycja = amount.find(',');
+
+  if(pozycja != string::npos)
+  {
+      amount.replace(pozycja,1,".");
+  }
+
     try
     {
         size_t position;

@@ -79,10 +79,12 @@ int main()
 
             case '3':
                 financialOperationManager->displayCurrentBalance();
+                system("pause");
                 break;
 
             case '4':
                 financialOperationManager->displayPreviousBalance();
+                system("pause");
                 break;
 
             case '5':
