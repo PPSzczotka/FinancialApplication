@@ -6,6 +6,7 @@
 #include "AmountMethods.h"
 
 #include <algorithm>
+#include <iomanip>
 
 FinancialOperationManager:: FinancialOperationManager (
 string incomeFileName,
@@ -87,6 +88,7 @@ FinancialOperation FinancialOperationManager::addOperationDetails(Type type)
         }
     }
     while (!amountMethods.validateAmount(kwota));
+    kwota= amountMethods.convertCommaToDot(kwota);
     financialOperation.amount= stod(kwota);
 
     financialOperation.type= type;
@@ -184,6 +186,7 @@ void FinancialOperationManager::showBalance(int startDate, int endDate)
     double wydatki = calculateBalance(startDate,endDate,Type::EXPENSE);
     double bilans = przychod-wydatki;
 
+    cout<< fixed << setprecision(2);
     DateMethods dateMethods;
     for (vector<FinancialOperation>::iterator itr = operations.begin(); itr !=operations.end(); itr++)
     {

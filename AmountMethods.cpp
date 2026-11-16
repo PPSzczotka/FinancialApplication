@@ -3,13 +3,7 @@
 
 bool AmountMethods::validateAmount(string amount)
 {
-  size_t pozycja = amount.find(',');
-
-  if(pozycja != string::npos)
-  {
-      amount.replace(pozycja,1,".");
-  }
-
+  amount = convertCommaToDot(amount);
     try
     {
         size_t position;
@@ -24,4 +18,15 @@ bool AmountMethods::validateAmount(string amount)
        return false;
     }
     return false;
+}
+
+string AmountMethods::convertCommaToDot(string amount)
+{
+    size_t pozycja = amount.find(',');
+
+    if(pozycja != string::npos)
+    {
+        amount.replace(pozycja,1,".");
+    }
+    return amount;
 }

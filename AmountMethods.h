@@ -9,6 +9,7 @@ class AmountMethods
 {
     public:
     bool validateAmount(string amount);
+    string convertCommaToDot(string amount);
 };
 
 #endif

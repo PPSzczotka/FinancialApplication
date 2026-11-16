@@ -61,7 +61,7 @@
 	"User.h"
 	"UserFile.h"
 
-1794769225 source:c:\projekty\financialapplication\financialoperationmanager.cpp
+1794852509 source:c:\projekty\financialapplication\financialoperationmanager.cpp
 	"FinancialOperationManager.h"
 	"FinancialOperation.h"
 	"HelperMethods.h"
@@ -69,6 +69,7 @@
 	"DateMethods.h"
 	"AmountMethods.h"
 	<algorithm>
+	<iomanip>
 
 1794769225 c:\projekty\financialapplication\financialoperationmanager.h
 	<vector>
@@ -104,9 +105,9 @@
 	<ctime>
 	<map>
 
-1794592505 source:c:\projekty\financialapplication\amountmethods.cpp
+1794852656 source:c:\projekty\financialapplication\amountmethods.cpp
 	"AmountMethods.h"
 
-1791301442 c:\projekty\financialapplication\amountmethods.h
+1794852427 c:\projekty\financialapplication\amountmethods.h
 	<iostream>
 
