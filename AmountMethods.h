@@ -1,8 +1,7 @@
 #ifndef  AMOUNTMETHODS_H
 #define AMOUNTMETHODS_H
 
-#include <iostream>
-
+#include <string>
 using namespace std;
 
 class AmountMethods

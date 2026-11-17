@@ -1,6 +1,7 @@
 #include "FinancialOperationFile.h"
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 
 FinancialOperationFile::FinancialOperationFile(string fileName) : File(fileName)
 {
@@ -16,11 +17,15 @@ vector<FinancialOperation> FinancialOperationFile:: loadOperationsFromFile(const
         return financialOperations;
     }
     xml.ResetPos();
-    xml.FindElem( "Operations" );
+    if(!xml.FindElem( "Operations" ))
+    {
+        return financialOperations;
+    }
     xml.IntoElem();
     while (xml.FindElem("Operation"))
     {
         FinancialOperation financialOperation;
+        financialOperation.type = type;
 
         xml.IntoElem();
         xml.FindElem("id");

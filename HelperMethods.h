@@ -1,8 +1,9 @@
-#ifndef  HELERMETHODS_H
-#define   HELERMETHODS_H
+#ifndef  HELPERMETHODS_H
+#define   HELPERMETHODS_H
 
 #include <iostream>
 #include <sstream>
+#include <string>
 
 using namespace std;
 

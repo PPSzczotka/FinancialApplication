@@ -4,6 +4,7 @@
 #include <iostream>
 #include <ctime>
 #include <map>
+#include <string>
 
 using namespace std;
 

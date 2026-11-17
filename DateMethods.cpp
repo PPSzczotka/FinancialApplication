@@ -1,5 +1,4 @@
 #include "DateMethods.h"
-#include <ctime>
 #include <cctype>
 
 int DateMethods::convertStringDateToInt(const string &dateAsString)
@@ -32,14 +31,13 @@ bool DateMethods:: validateDate(const string &date)
         return false;
     }
 
-    for (char znak : date)
+    for (unsigned char znak : date)
     {
         if (!isdigit(znak))
             {
                 return false;
             }
     }
-    system("pause");
 
     year = stoi(date.substr(0,4));
     month = stoi(date.substr(4,2));

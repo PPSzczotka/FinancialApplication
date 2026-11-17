@@ -25,8 +25,8 @@
 	"File.h"
 	"User.h"
 
-1789486136 c:\projekty\financialapplication\user.h
-	<iostream>
+1794940979 c:\projekty\financialapplication\user.h
+	<string>
 
 1303063612 source:c:\projekty\financialapplication\markup.cpp
 	<stdio.h>
@@ -40,22 +40,25 @@
 
 1789400875 source:c:\projekty\financialapplication\user.cpp
 
-1790270951 source:c:\projekty\financialapplication\userfile.cpp
+1794944961 source:c:\projekty\financialapplication\userfile.cpp
 	"UserFile.h"
 	<string>
+	<iostream>
 
-1794937431 source:c:\projekty\financialapplication\usermanager.cpp
+1794944828 source:c:\projekty\financialapplication\usermanager.cpp
 	"UserManager.h"
 	"HelperMethods.h"
 	"File.h"
 
-1790185887 source:c:\projekty\financialapplication\helpermethods.cpp
+1794940867 source:c:\projekty\financialapplication\helpermethods.cpp
 	<sstream>
 	"HelperMethods.h"
+	<iostream>
 
-1790179236 c:\projekty\financialapplication\helpermethods.h
+1794940811 c:\projekty\financialapplication\helpermethods.h
 	<iostream>
 	<sstream>
+	<string>
 
 1790787311 c:\projekty\financialapplication\usermanager.h
 	"User.h"
@@ -78,36 +81,36 @@
 	"FinancialOperationFile.h"
 	"Type.h"
 
-1791213096 c:\projekty\financialapplication\financialoperation.h
-	<iostream>
+1794941088 c:\projekty\financialapplication\financialoperation.h
 	"Type.h"
+	<string>
 
-1789486136 c:\projekty\financialapplication\type.h
-	<iostream>
+1794941124 c:\projekty\financialapplication\type.h
 
-1794854041 source:c:\projekty\financialapplication\financialoperationfile.cpp
+1794941162 source:c:\projekty\financialapplication\financialoperationfile.cpp
 	"FinancialOperationFile.h"
 	<sstream>
 	<iomanip>
+	<iostream>
 
 1794854041 c:\projekty\financialapplication\financialoperationfile.h
 	<vector>
 	"File.h"
 	"FinancialOperation.h"
 
-1794506396 source:c:\projekty\financialapplication\datemethods.cpp
+1794940533 source:c:\projekty\financialapplication\datemethods.cpp
 	"DateMethods.h"
-	<ctime>
 	<cctype>
 
-1794506364 c:\projekty\financialapplication\datemethods.h
+1794940385 c:\projekty\financialapplication\datemethods.h
 	<iostream>
 	<ctime>
 	<map>
+	<string>
 
 1794852656 source:c:\projekty\financialapplication\amountmethods.cpp
 	"AmountMethods.h"
 
-1794852427 c:\projekty\financialapplication\amountmethods.h
-	<iostream>
+1794940607 c:\projekty\financialapplication\amountmethods.h
+	<string>
 

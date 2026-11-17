@@ -1,7 +1,7 @@
-#include <iostream>
 #ifndef FINANCIALOPERATION_H
 #define  FINANCIALOPERATION_H
 #include "Type.h"
+#include <string>
 
 using namespace std;
 

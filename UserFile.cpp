@@ -1,6 +1,6 @@
 #include "UserFile.h"
 #include <string>
-
+#include <iostream>
 UserFile :: UserFile (string userFileName) : File(userFileName)
 {
 
@@ -16,7 +16,10 @@ vector<User> UserFile:: loadUsersFromFile()
     }
 
     xml.ResetPos();
-    xml.FindElem( "Users" );
+    if(!xml.FindElem( "Users" ))
+    {
+        return users;
+    }
     xml.IntoElem();
 
     while (xml.FindElem("User"))
@@ -59,7 +62,10 @@ bool UserFile:: addUserToFile(const User &user)
     }
 
     xml.ResetPos();
-    xml.FindElem("Users");
+    if(!xml.FindElem("Users"))
+    {
+        return false;
+    }
     xml.IntoElem();
 
     xml.AddElem("User");
@@ -80,32 +86,49 @@ bool UserFile:: addUserToFile(const User &user)
 }
 
 bool UserFile::changePasswordInFile(int id, const string &password)
-
 {
     if (!xml.Load(getFileName()))
     {
-        cout << "Nie udalo sie otworzyc pliku XML!" << endl;
         return false;
     }
+
     xml.ResetPos();
-    xml.FindElem( "Users" );
+    if (!xml.FindElem("Users"))
+    {
+        return false;
+    }
+
     xml.IntoElem();
     while (xml.FindElem("User"))
     {
-        User user;
-
         xml.IntoElem();
-        xml.FindElem("id");
-        user.id = stoi(xml.GetData());
 
-        if (user.id == id)
+        if (!xml.FindElem("id"))
         {
-            xml.FindElem("password");
+            return false;
+        }
+
+        int userId = stoi(xml.GetData());
+        if (userId == id)
+        {
+
+            if (!xml.FindElem("password"))
+            {
+                return false;
+            }
+
             xml.SetData(password);
-            xml.Save(getFileName());
+            bool zapisano = xml.Save(getFileName());
+
+            if (!zapisano)
+            {
+                return false;
+            }
             return true;
         }
+
         xml.OutOfElem();
     }
+
     return false;
 }

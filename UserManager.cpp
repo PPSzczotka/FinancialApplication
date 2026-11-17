@@ -15,22 +15,36 @@ void UserManager:: registerUser()
 
     user.id=userFile.getLastId()+1;
 
+    do
+    {
     cout<< "Podaj imie:";
     user.firstName=HelperMethods::wczytajLinie();
+    }
+    while(user.firstName.empty());
 
+    do
+    {
     cout<< "Podaj nazwisko:";
     user.lastName=HelperMethods::wczytajLinie();
+    }
+    while(user.lastName.empty());
 
     do
     {
         cout<< "Podaj login:";
         user.login=HelperMethods::wczytajLinie();
-    }
-    while(checkIfLoginExist(user.login));
+        if (user.login.empty())
+            cout << "Login nie moze byc pusty!" << endl;
 
+    }
+    while (user.login.empty() || checkIfLoginExist(user.login));
+
+    do
+    {
     cout<< "Podaj haslo:";
     user.password=HelperMethods::wczytajLinie();
-
+    }
+    while(user.password.empty());
 
     if (userFile.addUserToFile(user))
     {
@@ -48,11 +62,11 @@ void UserManager:: registerUser()
 
 bool UserManager::checkIfLoginExist(const string &login)
 {
-    for (User &user : users)
+    for (const User &user : users)
     {
         if (login==user.login)
         {
-            cout<<"Uzytkownik o podanym loginie nie istnieje. Podaj ponownie login"<< endl;
+            cout<<"Uzytkownik o podanym loginie istnieje. Podaj ponownie login"<< endl;
             return true;
         }
     }
@@ -99,11 +113,7 @@ bool UserManager::loginUser()
 
 bool UserManager::isUserLoggedIn()
 {
-    if (loggedUserId > 0)
-    {
-        return true;
-    }
-    return false;
+    return loggedUserId > 0;
 }
 
 void UserManager:: logoutUser()
@@ -119,18 +129,24 @@ int UserManager:: getLoggedUserId()
 void UserManager:: changeUserPassword()
 {
     string noweHaslo = "";
+    do
+    {
     cout << "Podaj nowe haslo:"<< endl;
     noweHaslo = HelperMethods::wczytajLinie();
+    }
+    while(noweHaslo.empty());
 
     if(userFile.changePasswordInFile(loggedUserId,noweHaslo))
     {
         cout<< "Haslo zostalo zmienione!"<< endl;
+        system("pause");
         vector<User>::iterator itr = users.begin();
         while (itr != users.end())
         {
             if(itr ->id == loggedUserId)
             {
                 itr-> password = noweHaslo;
+                break;
             }
             itr++;
         }
@@ -138,5 +154,6 @@ void UserManager:: changeUserPassword()
     else
     {
         cout<<"Zmiana hasla nie powiodla sie" << endl;
+        system("pause");
     }
 }
