@@ -34,19 +34,25 @@ void UserManager:: registerUser()
 
     if (userFile.addUserToFile(user))
     {
+        cout<< " Twoje dane zostaly zapisane poprawnie"<< endl;
         users.push_back(user);
-
+        system("pause");
+    }
+    else
+    {
+        cout << "Blad zapisu danych.Rejestracja nie powiodla sie"<< endl;
+        system("pause");
     }
 
 }
 
 bool UserManager::checkIfLoginExist(const string &login)
 {
-    for (User user : users)
+    for (User &user : users)
     {
         if (login==user.login)
         {
-            cout<<"Uzytkownik o takim loginie istnieje.Podaj nowy login"<< endl;
+            cout<<"Uzytkownik o podanym loginie nie istnieje. Podaj ponownie login"<< endl;
             return true;
         }
     }
@@ -56,28 +62,38 @@ bool UserManager::checkIfLoginExist(const string &login)
 bool UserManager::loginUser()
 {
     string login = "", haslo = "";
-    cout << endl << "Podaj login:";
-    login = HelperMethods::wczytajLinie();
 
-    vector<User>::iterator itr = users.begin();
-    while (itr != users.end())
+    do
     {
+        cout << endl << "Podaj login:";
+        login = HelperMethods::wczytajLinie();
+        vector<User>::iterator itr = users.begin();
+        while (itr != users.end())
+        {
         if(itr ->login == login)
         {
-            cout << endl << "Podaj haslo:";
-            haslo = HelperMethods::wczytajLinie();
-            if (itr->password == haslo)
+            for(int probaHasla = 0; probaHasla<3; probaHasla++)
             {
-                loggedUserId= itr-> id;
-                return true;
+                cout << endl << "Podaj haslo:";
+                 haslo = HelperMethods::wczytajLinie();
+                if (itr->password == haslo)
+                {
+                    loggedUserId= itr-> id;
+                    cout<<"Zalogowales sie prawidlowo"<<endl;
+                    return true;
+                }
+                else
+                {
+                    cout<<"Haslo jest nieprawidlowe"<<endl;
+                }
             }
-            else
-            {
-                cout<<"Haslo jest nieprawidlowe"<<endl;
-            }
+            return false;
         }
         itr++;
+        }
+        cout<<"Uzytkownik o podanym loginie nie istnieje. Podaj ponownie login"<< endl;
     }
+    while(!checkIfLoginExist(login));
     return false;
 }
 

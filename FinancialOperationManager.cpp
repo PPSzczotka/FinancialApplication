@@ -193,7 +193,18 @@ void FinancialOperationManager::showBalance(int startDate, int endDate)
         int dataOperacji = dateMethods.convertStringDateToInt(itr->date);
         if(dataOperacji >= startDate && dataOperacji<= endDate)
         {
-            cout << "Data operacji: "<< itr->date
+            string typOperacji;
+            if(itr-> type == Type::INCOME)
+            {
+                typOperacji = "Przychod";
+            }
+            else
+            {
+                typOperacji = "Wydatek";
+            }
+
+            cout <<" Typ Operacji: " << typOperacji
+                 << " | Data operacji: "<< itr->date
                  << " | Opis operacji: "<< itr->item
                  << " | Kwota: "<< itr->amount << endl;
         }
@@ -237,30 +248,55 @@ void FinancialOperationManager::displayBalanceForPeriod()
 
     do
     {
-            do
+        bool poprawnaDataPoczatkowa = false;
+        do
+        {
+            cout << "Podaj date poczatkowa:"<< endl;
+            startDate = HelperMethods::wczytajLinie();
+            if(dateMethods.validateDate(startDate))
             {
-                cout << "Podaj date poczatkowa:"<< endl;
-                startDate = HelperMethods::wczytajLinie();
-                if(!dateMethods.validateDate(startDate))
+                startDateInt = dateMethods.convertStringDateToInt(startDate);
+                if(startDateInt < 20000101 || startDateInt > dateMethods.getCurrentMonthLastDayDate())
                 {
                     cout<< "Poczatkowa data jest nieprawidlowa. Wprowadz ponownie" << endl;
                 }
+                else
+                {
+                    poprawnaDataPoczatkowa = true;
+                }
+
             }
-            while(!dateMethods.validateDate(startDate));
-
-
-            do
+            else
             {
-                cout << "Podaj date koncowa:"<< endl;
-                endDate = HelperMethods::wczytajLinie();
-                if(!dateMethods.validateDate(endDate))
+                cout<< "Poczatkowa data jest nieprawidlowa. Wprowadz ponownie" << endl;
+            }
+        }
+        while(!poprawnaDataPoczatkowa);
+
+        bool poprawnaDataKoncowa = false;
+        do
+        {
+            cout << "Podaj date koncowa:"<< endl;
+            endDate = HelperMethods::wczytajLinie();
+            if(dateMethods.validateDate(endDate))
+            {
+                endDateInt = dateMethods.convertStringDateToInt(endDate);
+                if(endDateInt < 20000101 || endDateInt > dateMethods.getCurrentMonthLastDayDate())
                 {
                     cout<< "Koncowa data jest nieprawidlowa. Wprowadz ponownie" << endl;
                 }
+                else
+                {
+                    poprawnaDataKoncowa= true;
+                }
             }
-            while(!dateMethods.validateDate(endDate));
-        startDateInt = dateMethods.convertStringDateToInt(startDate);
-        endDateInt = dateMethods.convertStringDateToInt(endDate);
+            else
+            {
+                cout<< "Koncowa data jest nieprawidlowa. Wprowadz ponownie" << endl;
+            }
+        }
+        while(!poprawnaDataKoncowa);
+
         if (startDateInt > endDateInt)
         {
             cout << "Zakres dat jest nieprawidlowy" << endl;

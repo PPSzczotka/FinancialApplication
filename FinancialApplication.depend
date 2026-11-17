@@ -44,7 +44,7 @@
 	"UserFile.h"
 	<string>
 
-1790355721 source:c:\projekty\financialapplication\usermanager.cpp
+1794937431 source:c:\projekty\financialapplication\usermanager.cpp
 	"UserManager.h"
 	"HelperMethods.h"
 	"File.h"
@@ -61,7 +61,7 @@
 	"User.h"
 	"UserFile.h"
 
-1794852509 source:c:\projekty\financialapplication\financialoperationmanager.cpp
+1794857982 source:c:\projekty\financialapplication\financialoperationmanager.cpp
 	"FinancialOperationManager.h"
 	"FinancialOperation.h"
 	"HelperMethods.h"
@@ -85,12 +85,12 @@
 1789486136 c:\projekty\financialapplication\type.h
 	<iostream>
 
-1794503837 source:c:\projekty\financialapplication\financialoperationfile.cpp
+1794854041 source:c:\projekty\financialapplication\financialoperationfile.cpp
 	"FinancialOperationFile.h"
 	<sstream>
 	<iomanip>
 
-1791214402 c:\projekty\financialapplication\financialoperationfile.h
+1794854041 c:\projekty\financialapplication\financialoperationfile.h
 	<vector>
 	"File.h"
 	"FinancialOperation.h"

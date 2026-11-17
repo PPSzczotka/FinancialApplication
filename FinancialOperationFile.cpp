@@ -7,7 +7,7 @@ FinancialOperationFile::FinancialOperationFile(string fileName) : File(fileName)
 
 }
 
-vector<FinancialOperation> FinancialOperationFile:: loadOperationsFromFile(const int loggedUserId, const Type &type)
+vector<FinancialOperation> FinancialOperationFile:: loadOperationsFromFile(const int loggedUserId,const Type &type)
 {
     vector<FinancialOperation> financialOperations;
     if(!xml.Load(getFileName()))

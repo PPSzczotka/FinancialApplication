@@ -118,4 +118,11 @@
 <item>llllllllllllllllllllllllllllllllllllllllll</item>
 <amount>4422.24</amount>
 </Operation>
+<Operation>
+<id>18</id>
+<userId>8</userId>
+<date>20261101</date>
+<item>12</item>
+<amount>12.00</amount>
+</Operation>
 </Operations>
