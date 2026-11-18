@@ -139,4 +139,11 @@
 <login>kit123</login>
 <password>rok123</password>
 </User>
+<User>
+<id>18</id>
+<firstName>Rafal</firstName>
+<lastName>Kowalski</lastName>
+<login>kowal12</login>
+<password>kow123</password>
+</User>
 </Users>
